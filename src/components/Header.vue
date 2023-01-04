@@ -12,14 +12,14 @@
           </div>
           Information
         </div>
-        <div class="flex border-t-2 border-dashed w-[50px] mx-5 border-gray-500"></div>
+        <div class="flex border-t-2 border-dashed w-[50px] mx-5 border-gray-300"></div>
         <div class="font-bold flex flex-row">
           <div class="p-1 bg-gray-400 rounded-full mr-2 text-[16px] flex items-center justify-center w-[24px] h-[24px]">
             2
           </div>
           Payment Details
         </div>
-        <div class="flex border-t-2 border-dashed w-[50px] mx-5 border-gray-500">
+        <div class="flex border-t-2 border-dashed w-[50px] mx-5 border-gray-300">
         </div>
         <div class="font-bold flex-row flex text-gray-500">
           <div class="p-1 bg-gray-400 rounded-full mr-2 text-[16px] flex items-center justify-center w-[24px] h-[24px]">

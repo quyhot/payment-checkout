@@ -18,7 +18,7 @@
 <script>
 export default {
   name: "ShippingMethod",
-  props: ["data"],
+  props: ["data", "error"],
   methods: {
     changeInput(e) {
       this.$emit("changeShippingMethod2", {id: e.target.value})

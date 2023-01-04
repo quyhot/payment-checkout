@@ -18,9 +18,10 @@
       <div class="flex items-center flex-col rounded-2xl w-full border-2">
         <div>{{ checked }}</div>
         <div v-for="transport in transports" :key="transport._id">
-          <ShippingMethod v-model="checked" :data=transport @changeShippingMethod2="changeShippingMethod2"/>
+          <ShippingMethod v-model="checked" :data=transport @changeShippingMethod2="changeShippingMethod2" :error="error"/>
         </div>
       </div>
+      <div class="text-red-400">{{ error }}</div>
     </div>
   </div>
 </template>
@@ -28,24 +29,20 @@
 <script>
 import Product from "@/components/Product";
 import ShippingMethod from "@/components/ShippingMethod";
-import {getProducts, getTransports} from "@/helper";
+import {getTransports} from "@/helper";
 
 export default {
   name: "LeftBody",
-  props: ["changeShippingMethod"],
+  props: ["changeShippingMethod","products", "error"],
   components: {Product, ShippingMethod},
   data() {
     return {
-      products: [],
       transports: [],
       checked: ''
     }
   },
   async mounted() {
-    const {data: {data: products}} = await getProducts()
     const {data: {data: transports}} = await getTransports()
-    console.log('products ', products)
-    this.products = products
     this.transports = transports
   },
   methods: {

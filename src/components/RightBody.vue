@@ -17,7 +17,7 @@
         <span
             class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700 my-5">Phone</span>
         <input type="tel" name="phone"
-              v-model="form.phone"
+               v-model="form.phone"
                class="h-[50px] mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
                placeholder="0123456789"/>
       </label>
@@ -25,25 +25,27 @@
         <span
             class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700 my-5">Name</span>
         <input type="text" name="name"
-              v-model="form.name"
+               v-model="form.name"
                class="h-[50px] mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
                placeholder="quyhot"/>
       </label>
       <div class="flex flex-col my-5">
         <div class="flex flex-row justify-between my-2 text-xl">
           <div>Total</div>
-          <div>$ 397.00</div>
+          <div>$ {{total}}</div>
         </div>
-<!--        <div class="flex flex-row justify-between my-2 text-xl">-->
-<!--          <div>VAT</div>-->
-<!--          <div>$ 2.89</div>-->
-<!--        </div>-->
-<!--        <div class="flex flex-row justify-between my-2 font-bold text-xl">-->
-<!--          <div>Total</div>-->
-<!--          <div>$ 399.89</div>-->
-<!--        </div>-->
+        <!--        <div class="flex flex-row justify-between my-2 text-xl">-->
+        <!--          <div>VAT</div>-->
+        <!--          <div>$ 2.89</div>-->
+        <!--        </div>-->
+        <!--        <div class="flex flex-row justify-between my-2 font-bold text-xl">-->
+        <!--          <div>Total</div>-->
+        <!--          <div>$ 399.89</div>-->
+        <!--        </div>-->
       </div>
-      <button class="bg-black w-full text-white p-5 rounded-2xl text-2xl cursor-pointer hover:bg-gray-700" type="submit">Payment</button>
+      <button class="bg-black w-full text-white p-5 rounded-2xl text-2xl cursor-pointer hover:bg-gray-700"
+              type="submit">Payment
+      </button>
 
     </form>
   </div>
@@ -51,7 +53,7 @@
 
 <script>
 export default {
-
+  props: ["total"],
   data() {
     return {
       name: "RightBody",

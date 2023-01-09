@@ -48,7 +48,7 @@ export default {
     async checkout(data) {
       if (this.error || this.isZin) {
         this.error = 'Please choose...'
-        alert("NAKFJ")
+        alert("Please choose shipping method")
       } else {
         this.order = {...data, ...this.order, total: this.total, products: this.products.map(product => product._id)}
         // console.log("products", this.products)

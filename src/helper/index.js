@@ -70,9 +70,25 @@ const payment = async (id) => {
     }
 }
 
+const getInvoiceById = async (id) => {
+    try {
+        const options = {
+            url: `${backend}/invoices/${id}`,
+            json: true,
+            method: 'GET'
+        }
+        const {data} = await axios(options)
+        return {statusCode: 200, data}
+    } catch (e) {
+        console.log(e)
+        return {statusCode: 400, error: false}
+    }
+}
+
 export {
     getProducts,
     getTransports,
     createOrder,
-    payment
+    payment,
+    getInvoiceById
 }

@@ -25,7 +25,7 @@ export default {
     }
   },
   async mounted() {
-    const {data} = await getInvoices({})
+    const {data} = await getInvoices({perPage: 15})
     // console.log('invoices ', invoices)
     this.invoices = data?.data
   }

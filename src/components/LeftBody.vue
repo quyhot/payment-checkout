@@ -18,7 +18,7 @@
       <div class="flex items-center flex-col rounded-2xl w-full border-2">
         <div>{{ checked }}</div>
         <div v-for="transport in transports" :key="transport._id">
-          <ShippingMethod v-model="checked" :data=transport @changeShippingMethod2="changeShippingMethod2" :error="error"/>
+          <ShippingMethod v-model="checked" :data=transport @changeShippingMethod2="changeShippingMethod2" :error="error" :transportId="transportId"/>
         </div>
       </div>
       <div class="text-red-400">{{ error }}</div>
@@ -33,7 +33,7 @@ import {getTransports} from "@/helper";
 
 export default {
   name: "LeftBody",
-  props: ["changeShippingMethod","products", "error"],
+  props: ["changeShippingMethod","products", "error", "transportId"],
   components: {Product, ShippingMethod},
   data() {
     return {

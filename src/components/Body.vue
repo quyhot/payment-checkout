@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-row items-stretch">
     <div class=" flex-1">
-      <left-body @changeShippingMethod="changeShippingMethod" :products="products" :error="error"/>
+      <left-body @changeShippingMethod="changeShippingMethod" :products="products" :error="error" :transportId="transportId"/>
     </div>
     <div class="flex-1">
       <right-body @checkout="checkout" :total="total"/>
@@ -12,27 +12,35 @@
 <script>
 import LeftBody from "@/components/LeftBody";
 import RightBody from "@/components/RightBody";
-import {createOrder, getProducts, payment} from "@/helper";
+import {createOrder, getProducts, payment, getOrderById} from "@/helper";
 
 export default {
   // eslint-disable-next-line vue/multi-word-component-names,vue/no-reserved-component-names
   name: 'Body',
   components: {RightBody, LeftBody},
+  props: ['orderId', 'invoiceId'],
   data() {
     return {
       order: {},
       total: null,
       products: [],
       error: "",
-      isZin: true
+      isZin: true,
+      transportId: ''
     }
   },
   async mounted() {
-    const {data: {data: products}} = await getProducts()
-    this.products = products
-    this.total = products.reduce((accum, curr) => accum + curr.amount * curr.price, 0)
-    // console.log('total ', this.total)
-    // console.log('products ', products)
+    if (this.orderId) {
+      const {data: order} = await getOrderById(this.orderId)
+      this.products = order.products.map(product => ({...product.product, amount: product.amount}))
+      this.total = this.products.reduce((accum, curr) => accum + curr.amount * curr.price, 0)
+      this.transportId = order.transport
+      this.order = order
+    } else {
+      const {data: {data: products}} = await getProducts()
+      this.products = products
+      this.total = products.reduce((accum, curr) => accum + curr.amount * curr.price, 0)
+    }
   },
   methods: {
     changeShippingMethod(data) {
@@ -50,15 +58,19 @@ export default {
         this.error = 'Please choose...'
         alert("Please choose shipping method")
       } else {
-        this.order = {...data, ...this.order, total: this.total, products: this.products.map(product => product._id)}
-        // console.log("products", this.products)
-        const {statusCode, data: o} = await createOrder(this.order)
-        console.log('order', o)
-        if (statusCode !== 200) {
-          alert('Error')
+        let invoiceId
+        if (!this.orderId) {
+          this.order = {...data, ...this.order, total: this.total, products: this.products.map(product => ({product: product._id, amount: product.amount}))}
+          const {statusCode, data: invoice} = await createOrder(this.order)
+          if (statusCode !== 200) {
+            alert('Error')
+            return
+          }
+          invoiceId = invoice._id
+        } else {
+          invoiceId = this.invoiceId
         }
-        const pay = await payment(o._id)
-        console.log('pay', pay)
+        const pay = await payment(invoiceId)
         if (pay.statusCode !== 200) {
           alert('Error')
         }

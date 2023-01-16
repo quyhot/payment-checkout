@@ -85,6 +85,21 @@ const getInvoiceById = async (id) => {
     }
 }
 
+const getOrderById = async (id) => {
+    try {
+        const options = {
+            url: `${backend}/orders/${id}`,
+            json: true,
+            method: 'GET'
+        }
+        const {data} = await axios(options)
+        return {statusCode: 200, data}
+    } catch (e) {
+        console.log(e)
+        return {statusCode: 400, error: false}
+    }
+}
+
 const getInvoices = async (q) => {
     try {
         const options = {
@@ -107,5 +122,6 @@ export {
     createOrder,
     payment,
     getInvoiceById,
-    getInvoices
+    getInvoices,
+    getOrderById
 }

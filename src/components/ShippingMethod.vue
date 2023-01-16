@@ -11,14 +11,20 @@
     </div>
     <div class="flex items-center text-gray-500">
       <label for="draft" class="peer-checked/draft:text-sky-500">{{ data.price }} $</label>
-      <input type="radio" id="draft" :value="data._id" class="peer/draft ml-2" name="status" @change="changeInput"/>
+      <div v-if="transportId === data._id">
+        <input type="radio" id="draft" :value="data._id" class="peer/draft ml-2" name="status" @change="changeInput" checked />
+      </div>
+      <div v-else>
+        <input type="radio" id="draft" :value="data._id" class="peer/draft ml-2" name="status" @change="changeInput"/>
+      </div>
+
     </div>
   </div>
 </template>
 <script>
 export default {
   name: "ShippingMethod",
-  props: ["data", "error"],
+  props: ["data", "error","transportId"],
   methods: {
     changeInput(e) {
       this.$emit("changeShippingMethod2", {id: e.target.value})

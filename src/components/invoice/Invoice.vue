@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Header/>
-    <invoice-list :invoices="invoices"/>
+    <invoice-list :invoices="invoices" :pagination="pagination" @getInvoice="clickCallback"/>
   </div>
 </template>
 
@@ -21,13 +21,23 @@ export default {
   },
   data() {
     return {
-      invoices: null
+      invoices: null,
+      pagination: {}
     }
   },
   async mounted() {
-    const {data} = await getInvoices({perPage: 15})
-    // console.log('invoices ', invoices)
+    const {data} = await getInvoices({perPage: 5})
     this.invoices = data?.data
+    this.pagination.page = data?.page
+    this.pagination.total = data?.total
+    this.pagination.perPage = data?.perPage
+    this.pagination.pageTotal = Math.ceil(this.pagination.total / this.pagination.perPage)
+  },
+  methods: {
+    async clickCallback(pageNum) {
+      const {data} = await getInvoices({perPage: 5, page: pageNum})
+      this.invoices = data?.data
+    }
   }
 }
 </script>

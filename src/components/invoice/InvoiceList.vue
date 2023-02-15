@@ -97,5 +97,40 @@ export default {
 
 <style>
 /*@import 'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css';*/
+.pagination {
+  display: flex;
+  gap: 10px;
+  color: #236aee;
+}
+.page-item {
+  /*background-color: #1655f6;*/
+  padding: 5px 12px;
+  border-radius: 3px;
+  border: #236aee solid 1px;
+  /*border-color: #236aee;*/
+}
 
+.page-item:hover {
+  background-color: #e7e1e1;
+}
+
+.active {
+  background-color: #236aee;
+  color: white;
+}
+
+.disabled {
+  color: #a1a1a1;
+  border-color: #a1a1a1;
+}
+
+.active:hover {
+  background-color: #236aee;
+}
+
+.disabled:hover {
+  color: #a1a1a1;
+  border-color: #a1a1a1;
+  background-color: unset;
+}
 </style>

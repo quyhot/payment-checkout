@@ -14,6 +14,7 @@
         <img class="w-[100px] mb-10" src="../assets/multiply.png" >
       </div>
       <div class='text-2xl font-bold' :class="[color]">{{ msg }}</div>
+      <a href="/invoice" class="px-5 py-2 text-white mt-5 bg-green-600 hover:bg-green-500 rounded-sm">Back to List</a>
     </div>
   </div>
 </template>
